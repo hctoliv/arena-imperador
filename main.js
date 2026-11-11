@@ -105,7 +105,9 @@
     else t.classList.add('in');
     io.unobserve(t);
   })},{rootMargin:'0px 0px -8% 0px',threshold:.12});
-  $$('.rv,[data-count],#court').forEach(function(el){io.observe(el)});
+  $$('.rv,#court').forEach(function(el){io.observe(el)});
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}})},{threshold:0});
+  $$('[data-count]').forEach(function(el){cio.observe(el)});
 
   /* vídeos preguiçosos: carregam perto da tela e pausam fora dela */
   var vids=$$('video[data-lazy]');
